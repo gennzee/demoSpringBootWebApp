@@ -81,11 +81,19 @@ public class SampleApiImpl implements SampleApi {
     }
 
     @Override
-    public String postFormData(Map<String, String> m, MultipartFile[] files) {
+    public String uploadFile(Map<String, String> m, MultipartFile[] files) {
         for(MultipartFile file : files) {
             if(!file.isEmpty()){
                 fileUploaderService.uploadFile(file);
             }
+        }
+        return null;
+    }
+
+    @Override
+    public String deleteFile(String[] fileName) {
+        for (String name : fileName) {
+            fileUploaderService.deleteFile(name);
         }
         return null;
     }
