@@ -7,8 +7,8 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
-import java.util.Map;
 
 @RestController
 @RequestMapping("/sampleApi")
@@ -48,10 +48,15 @@ public interface SampleApi {
     //post uploadFile
     @ApiOperation(value = "Simple Post Method to upload files.")
     @PostMapping(path = {"/uploadFile"}, consumes = {"multipart/form-data"}, produces = {"application/json"})
-    String uploadFile(@RequestParam Map<String, String> m, @RequestParam("file") MultipartFile[] files);
+    String uploadFile(@RequestParam("file") MultipartFile[] files);
 
     //post deleteFile
-    @ApiOperation(value = "Simple Post Method to delete files.")
-    @PostMapping(path = {"/deleteFile"})
+    @ApiOperation(value = "Simple Delete Method to delete files.")
+    @DeleteMapping(value = {"/deleteFile"})
     String deleteFile(@RequestParam("fileName") String[] fileName);
+
+    //post read csv file
+    @ApiOperation(value = "Simple Read CSV method to upload data from csv file.")
+    @PostMapping(path = {"/uploadCsv"}, consumes = {"multipart/form-data"}, produces = {"application/json"})
+    String uploadCsv(@RequestParam("csvFile") MultipartFile[] files) throws IOException;
 }
