@@ -46,9 +46,10 @@ public interface SampleApi {
     String authenticateUser(@RequestBody SampleUserDto sampleUserDto);
 
     //post uploadFile
+    //instead of using @RequestParam for MultipartFile, use @RequestPart for Swagger to understand that's a file
     @ApiOperation(value = "Simple Post Method to upload files.")
     @PostMapping(path = {"/uploadFile"}, consumes = {"multipart/form-data"}, produces = {"application/json"})
-    String uploadFile(@RequestParam("file") MultipartFile[] files);
+    String uploadFile(@RequestPart("file") MultipartFile[] files);
 
     //post deleteFile
     @ApiOperation(value = "Simple Delete Method to delete files.")
@@ -56,7 +57,8 @@ public interface SampleApi {
     String deleteFile(@RequestParam("fileName") String[] fileName);
 
     //post read csv file
+    //instead of using @RequestParam for MultipartFile, use @RequestPart for Swagger to understand that's a file
     @ApiOperation(value = "Simple Read CSV method to upload data from csv file.")
     @PostMapping(path = {"/uploadCsv"}, consumes = {"multipart/form-data"}, produces = {"application/json"})
-    String uploadCsv(@RequestParam("csvFile") MultipartFile[] files) throws IOException;
+    String uploadCsv(@RequestPart("csvFile") MultipartFile[] files) throws IOException;
 }
